@@ -23,7 +23,7 @@ usuario = driver.find_element(By.ID, 'username')  # Substitua pelo campo de usu�
 senha = driver.find_element(By.ID, 'password')  # Substitua pelo campo de senha
 botao_login = driver.find_element(By.XPATH, '//*[@id="fm1"]/fieldset/div[3]/div/div[4]/input[4]')  # Substitua pelo botão de login
 
-usuario.send_keys('03483401253')
+usuario.send_keys('*******')
 senha.send_keys('carteira23')
 botao_login.click()
 interessado = driver.find_element(By.XPATH ,'//*[@id="sCmbFiltroBusca2"]/option[2]')
@@ -36,22 +36,18 @@ for arquivo_pdf in os.listdir(pasta_pdf):
         match = re.match(r'^(\d{9})\.pdf$', arquivo_pdf)
         if match:
             cpf = match.group(1)
-
             # Pesquisar o CPF no site
             campo_pesquisa = driver.find_element(By.XPATH, '//*[@id="txt-buscar-todos"]')  # Substitua pelo campo de pesquisa
             campo_pesquisa.clear()
             campo_pesquisa.send_keys(cpf)
             campo_pesquisa.send_keys(Keys.RETURN)
-            # Aguarde um tempo para carregar os resultados (ajuste conforme necessário)
+             #(ajuste conforme necessário)
             time.sleep(2)
-
             origem = driver.find_element(By.XPATH, '//*[@id="list-inbox"]/thead/tr/th[5]')
             origem.click()
             time.sleep(2)
             origem.click()
             time.sleep(2)
-
-
             try:
                 # Verificar se o elemento botao_para_entrar existe
                 elementos_botao = driver.find_elements(By.XPATH, '//*[@id="list-inbox"]/tbody/tr/td[3]')
@@ -67,11 +63,8 @@ for arquivo_pdf in os.listdir(pasta_pdf):
                     lista.click()
                     pyautogui.hotkey('ctrl', 'v')
                     
-                    # Aqui, após colar o texto, você pode enviar a tecla para baixo uma vez
                     for _ in range(4):
                         pyautogui.press('down')
-
-                    # Pressionar Enter
                     pyautogui.press('enter')
                     time.sleep(2)
                     arquivo_equivalente = driver.find_element(By.XPATH, '//*[@id="input-tmp2"]')  # para fazer upload do arquivo
